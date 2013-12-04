@@ -1,14 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(ev) {
   $(document).hammer().on('swiperight', function(e) {
-    var firstIntro = new steroids.views.WebView({
-      location:  '/first.html'
-    });
-    
-    var slideFromLeft = new steroids.Animation('slideFromLeft');
-    steroids.layers.push({
-      view: firstIntro,
-      animation: slideFromLeft
-    });
+    steroids.layers.pop();
   });
   
   $(document).hammer().on('swipeleft', function(e) {
