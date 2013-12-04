@@ -4,7 +4,7 @@
 steroids.config.name = "Drink with Friends"
 
 # -- Initial Location --
-steroids.config.location = "http://localhost/index.html"
+steroids.config.location = "http://localhost/first.html"
 
 # -- Tab Bar --
 # steroids.config.tabBar.enabled = true

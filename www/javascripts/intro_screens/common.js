@@ -1,5 +1,4 @@
-steroids.view.navigationBar.show("Drink with Friends");
-
+steroids.view.navigationBar.hide();
 document.addEventListener("DOMContentLoaded", function() {
   $("#opener").hammer().on("tap", function() {
     var otherView = new steroids.views.WebView({

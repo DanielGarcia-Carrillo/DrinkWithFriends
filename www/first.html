@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf8">
+  <meta name="viewport" content="width=device-width">
+  <title>My Steroids App</title>
+
+  <script src="components/jquery/jquery.min.js"></script>
+  <script src="vendor/hammerjs/jquery.hammer.min.js"></script>
+  
+  <link rel="stylesheet" href="vendor/topcoat/css/topcoat-mobile-light.css" />
+  <link rel="stylesheet" href="stylesheets/application.css" />
+
+  <script src="javascripts/onerror.js"></script>
+  <script src="javascripts/console.log.js"></script>
+
+  <!-- cordova.js is served from localhost to ensure the correct version -->
+  <script src="http://localhost/appgyver/cordova.js"></script>
+  <script src="components/steroids-js/steroids.js"></script>
+
+  <script src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
+  <script>
+    // This is just a placeholder, we need to initialize parse with these two keys when we write actual parse code
+    Parse.initialize("gyXzbOqy2b79Tpwep9UMsLHz2RFd3cdlaerZNf23", "TAZEo0G6LIL4GBXyDlUK90vPJiSf54BVTRdFblyA");
+  </script>
+
+  <script src="javascripts/intro_screens/common.js"></script>
+  <script src="javascripts/intro_screens/first.js"></script>
+</head>
+<body>
+  <div class="content-padded">
+    <h2>First Info Page</h2>
+    <p>Put some text here about why this app is for great</p>
+    <a class="topcoat-button">Signup</a>
+    <a class="topcoat-button">Login</a>
+    <br />
+	<a class="topcoat-button" id="opener">Press me I work</a>
+  </div>
+</body>
+</html>
