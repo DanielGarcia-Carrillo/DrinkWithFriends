@@ -1,11 +1,21 @@
 steroids.view.navigationBar.hide();
-document.addEventListener("DOMContentLoaded", function() {
-  $("#opener").hammer().on("tap", function() {
+document.addEventListener('DOMContentLoaded', function() {
+  $('#opener').hammer().on('tap', function() {
     var otherView = new steroids.views.WebView({
-      location: "/views/DrinkWithFriends/index.html"
+      location: '/views/DrinkWithFriends/index.html'
 	});
     steroids.layers.push({
       view: otherView
     });
+  });
+  
+  $('#login').hammer().on('tap', function() {
+    var loginModal = new steroids.views.WebView('/login.html');
+    steroids.modal.show(loginModal);
+  });
+  
+  $('#signup').hammer().on('tap', function() {
+    var signupModal = new steroids.views.WebView('/signup.html');
+    steroids.modal.show(signupModal);
   });
 });
