@@ -1,7 +1,7 @@
 window.DrinkWithFriendsController = {
 
   index: function () {
-    steroids.view.navigationBar.show("Index of DrinkWithFriends");
+    steroids.view.navigationBar.show("Welcom page");
   },
 
   show: function () {
