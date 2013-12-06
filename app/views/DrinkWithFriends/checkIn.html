@@ -1,0 +1,38 @@
+<script>
+  DrinkWithFriendsController.index();  
+</script>
+
+<html>
+<head>
+  <meta charset="utf8">
+  <meta name="viewport" content="width=device-width">
+  <title>Drink With Friends</title>
+
+  <script src="components/jquery/jquery.min.js"></script>
+  <script src="vendor/hammerjs/jquery.hammer.min.js"></script>
+  
+  <link rel="stylesheet" href="vendor/topcoat/css/topcoat-mobile-light.css" />
+  <link rel="stylesheet" href="stylesheets/application.css" />
+
+  <script src="javascripts/onerror.js"></script>
+  <script src="javascripts/console.log.js"></script>
+
+  <!-- cordova.js is served from localhost to ensure the correct version -->
+  <script src="http://localhost/cordova.js"></script>
+  <script src="components/steroids-js/steroids.js"></script>
+</head>
+<body>
+  <div class="content-padded">
+    <h2>Check In</h2>
+	<FORM action="/views/DrinkWithFriends/checkedIn.html" method="post">
+    <P>
+	Where? <input type="text" name="bar"><br>
+	With Who? <input type="text" name="withFriends"><br>
+	Cover? <input type="text" name="cover"><br>	
+	Wait Time? <input type="text" name="waitTime"><br>
+    <INPUT type="submit" value="Submit">
+    </P>
+ </FORM>
+  </div>
+</body>
+</html>
