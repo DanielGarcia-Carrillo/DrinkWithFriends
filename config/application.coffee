@@ -24,6 +24,11 @@ steroids.config.tabBar.tabs = [
     icon: "icons/telescope@2x.png"
     location: "http://localhost/views/DrinkWithFriends/checkIn.html"
   }
+  {
+    title: "Friends"
+    icon: "icons/telescope@2x.png"
+    location: "http://localhost/views/DrinkWithFriends/friendList.html"
+  }
 ]
 
 # steroids.config.tabBar.tintColor = "#000000"
