@@ -1,9 +1,12 @@
-<!DOCTYPE html>
+<script>
+  DrinkWithFriendsController.index();  
+</script>
+
 <html>
 <head>
   <meta charset="utf8">
   <meta name="viewport" content="width=device-width">
-  <title>My Steroids App</title>
+  <title>Drink With Friends</title>
 
   <script src="components/jquery/jquery.min.js"></script>
   <script src="vendor/hammerjs/jquery.hammer.min.js"></script>
@@ -20,11 +23,16 @@
 </head>
 <body>
   <div class="content-padded">
-    <h2>Signup Page</h2>
-    <input type="email" placeholder="Email" /><br />
-    <input type="password" placeholder="Password" /><br />
-    <a class="topcoat-button--cta">Signup</a>
-    <a class="topcoat-button">Connect with Facebook</a>
+    <h2>Check In</h2>
+	<FORM action="/views/DrinkWithFriends/checkedIn.html" method="post">
+    <P>
+	Where? <input type="text" name="bar"><br>
+	With Who? <input type="text" name="withFriends"><br>
+	Cover? <input type="text" name="cover"><br>	
+	Wait Time? <input type="text" name="waitTime"><br>
+    <INPUT type="submit" value="Submit">
+    </P>
+ </FORM>
   </div>
 </body>
 </html>

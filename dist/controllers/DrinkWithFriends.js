@@ -1,7 +1,7 @@
 window.DrinkWithFriendsController = {
 
   index: function () {
-    steroids.view.navigationBar.show("Index of DrinkWithFriends");
+    steroids.view.navigationBar.show("Welcome page");
   },
 
   show: function () {
@@ -15,8 +15,11 @@ window.DrinkWithFriendsController = {
       document.getElementById("show-id").textContent = showId;
     });
 
-  }
-
+  },
+  
+  tabOn: function () {
+    steroids.config.tabBar.enabled = true;
+  },
 };
 
 

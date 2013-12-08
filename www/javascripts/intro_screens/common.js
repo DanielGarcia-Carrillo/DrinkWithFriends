@@ -18,4 +18,13 @@ document.addEventListener('DOMContentLoaded', function() {
     var signupModal = new steroids.views.WebView('/signup.html');
     steroids.modal.show(signupModal);
   });
+  
+    $('#checkIn').hammer().on('tap', function() {
+    var checkInView = new steroids.views.WebView({
+		location: 'views/DrinkWithFriends/checkIn.html'
+	});
+    steroids.layers.push({
+		view: homePageView
+	});
+  });
 });
