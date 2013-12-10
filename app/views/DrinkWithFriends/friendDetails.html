@@ -1,0 +1,90 @@
+<script>
+		DrinkWithFriendsController.index();
+		var id = getUrlVars()["id"];
+		var db;
+		document.addEventListener("deviceready", onDeviceReady, false);
+
+		function onDeviceReady() {
+			console.log("opening database");
+			db = window.openDatabase(
+			"FriendDatabase",       // database name
+			"1.0",            // database version
+			"Friend ListDB",   // database display name
+			200000            // database size in bytes
+			);
+			console.log("database opened");
+			db.transaction(getFriend, transaction_error);
+		}
+
+		function transaction_error(tx, error) {
+			$('#busy').hide();
+			alert("Database Error: " + error);
+		}
+
+		function getFriend(tx) {
+			$('#busy').show();
+			var sql = "SELECT * FROM friends where id=" + id;
+			tx.executeSql(sql, [], getFriend_success);
+		}
+
+		function getFriend_success(tx, results) {
+			$('#busy').hide();			
+			var friend = results.rows.item(0);
+			$('#friendIcon').attr('src', 'icons/' + friend.icon);
+			$('#fullName').text(friend.firstName + ' ' + friend.lastName);
+			$('#friendEmail').text(friend.email);
+		}
+
+		function getUrlVars() {
+			var vars = [], hash;
+			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+			for(var i = 0; i < hashes.length; i++)
+			{
+				hash = hashes[i].split('=');
+				vars.push(hash[0]);
+				vars[hash[0]] = hash[1];
+			}
+			return vars;
+		}
+	</script>
+		
+<html>
+    <head>
+		<meta charset="utf8">
+        <title>Friend Info</title>
+		<meta name="viewport" content="width=device-width">
+		<script src="components/jquery/jquery.min.js"></script>
+		<script src="vendor/hammerjs/jquery.hammer.min.js"></script>
+		<script src="http://localhost/cordova.js"></script>
+		<script src="components/steroids-js/steroids.js"></script>
+		<script src="javascripts/onerror.js"></script>
+		<script src="javascripts/console.log.js"></script>
+		<link rel="stylesheet" href="vendor/topcoat/css/topcoat-mobile-light.css" />
+		<link rel="stylesheet" href="stylesheets/application.css" />
+		
+    </head>
+    
+    <body>
+        
+	<div id="header" class="header">
+		<a href="friendList.html" class="nav">Back</a>
+		<h1>Friend Info</h1>
+	</div>
+	<div id="header2">
+		<h2>Friend Details</h2>
+	</div>
+	
+	<div id="wrapper">
+	  	<div>
+	  		<div id="friendDetails">
+	       		<h3 id="fullName"></h3>
+	       		<p id="friendEmail"></p>
+	  		</div> 
+	  	</div>
+	</div>
+
+	<div id="busy"/>Loading...</div>
+
+    </body>
+
+</html>

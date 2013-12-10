@@ -7,6 +7,7 @@
 
 	<script src="components/jquery/jquery.min.js"></script>
     <script src="vendor/hammerjs/jquery.hammer.min.js"></script>
+	<script src="http://localhost/cordova.js"></script>
 	<script src="components/steroids-js/steroids.js"></script>
     <script src="javascripts/onerror.js"></script>
     <script src="javascripts/console.log.js"></script>
@@ -47,18 +48,17 @@
 		"id unique, " +
 		"firstName VARCHAR(50), " +
 		"lastName VARCHAR(50), " +
-		"email VARCHAR(30))";
+		"email VARCHAR(30)," + 
+		"icon VARCHAR(200))";
       tx.executeSql(sql);
-	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email) VALUES (1,'Jessica','Mullins','jessica@gmail.com')");
-	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email) VALUES (2,'Daniel','Garcia-Carrillo','daniel@gmail.com')");  
-	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email) VALUES (3,'Helen','Zhou','helen@gmail.com')");  
-  	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email) VALUES (4,'Alex','Camargo','alex@gmail.com')");  
+	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon) VALUES (1,'Jessica','Mullins','jessica@gmail.com','/friendIcon/jess.jpg')");
+	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon) VALUES (2,'Daniel','Garcia-Carrillo','daniel@gmail.com','/friendIcon/jess.jpg')");  
+	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon) VALUES (3,'Helen','Zhou','helen@gmail.com','/friendIcon/jess.jpg')");  
+  	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon) VALUES (4,'Alex','Camargo','alex@gmail.com','/friendIcon/jess.jpg')");  
 
 	}
 
     function populatingDone(){
-      var status = document.querySelector("#status");
-      status.innerText = "Database successfully created!"
       db.transaction(queryDB, databaseError);
     }
 
@@ -80,9 +80,11 @@
       for (var i=0; i<len; i++){
 		var friend = results.rows.item(i);
 		$('#friendList').append('<li>' +
+					'<a href="friendDetails.html?id=' + friend.id + '">' +
+					'<img scrc="icons/' + friend.photo + '" class="list-icon"/>' +
 					'<p class="line1">' + friend.firstName + ' ' + friend.lastName + '</p>' +
 					'<p class="line2">' + friend.email + '</p>' +
-					'<span class="bubble"' + len + '</span></li>');
+					'<span class="bubble"' + len + '</span></a></li>');
 		}
 		$('#status').hide();
 	}
@@ -95,12 +97,14 @@
 	</script>  
   </head>
   <body>
-    <div class="content-padded">
-      <h1>Friends List</h1>
-      <span id="status">Loading...</span>
-    </div>
+	<div id="header" class="header">
+		<h1>Friend List</h1>
+	</div>
+	<div id="busy"/>Loading...</div>
 	<div id="wrapper">
 		<ul id="friendList" class="icon-list"></ul>
 	</div>
+
+
   </body>
 </html>
