@@ -18,4 +18,28 @@ document.addEventListener('DOMContentLoaded', function() {
     var signupModal = new steroids.views.WebView('/signup.html');
     steroids.modal.show(signupModal);
   });
+  
+   $('#first').hammer().on('tap', function() {
+    var firstModal = new steroids.views.WebView('/first.html');
+    steroids.modal.show(firstModal);
+  });
+   
+   $('#checkIn').hammer().on('tap', function() {
+    var checkInView = new steroids.views.WebView({
+		location: 'views/DrinkWithFriends/checkIn.html'
+	});
+    steroids.layers.push({
+		view: homePageView
+	});
+  });
+  
+   $('#friendList').hammer().on('tap', function() {
+    var checkInView = new steroids.views.WebView({
+		location: 'views/DrinkWithFriends/friendList.html'
+	});
+    steroids.layers.push({
+		view: homePageView
+	});
+  });
+  
 });
