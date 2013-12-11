@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
       location: '/views/DrinkWithFriends/index.html'
 	});
     steroids.layers.push({
+      tabBar: true,
       view: otherView
     });
   });
@@ -17,11 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
   $('#signup').hammer().on('tap', function() {
     var signupModal = new steroids.views.WebView('/signup.html');
     steroids.modal.show(signupModal);
-  });
-  
-   $('#first').hammer().on('tap', function() {
-    var firstModal = new steroids.views.WebView('/first.html');
-    steroids.modal.show(firstModal);
   });
    
    $('#checkIn').hammer().on('tap', function() {
