@@ -1,3 +1,4 @@
+steroids.tabBar.show();
 window.DrinkWithFriendsController = {
 
   index: function () {
@@ -20,6 +21,10 @@ window.DrinkWithFriendsController = {
   tabOn: function () {
     steroids.config.tabBar.enabled = true;
   },
+  
+  bars: function () {
+  	// Do stuff  
+  }
 };
 
 
@@ -32,7 +37,10 @@ document.addEventListener("DOMContentLoaded", function() {
     webView = new steroids.views.WebView({ location: this.getAttribute("data-location") });
 
     // ...is pushed to the navigation stack, opening on top of the current WebView.
-    steroids.layers.push({ view: webView });
+    steroids.layers.push({
+      tabBar: true,
+      view: webView
+    });
   });
 
 });
