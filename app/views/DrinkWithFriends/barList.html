@@ -1,0 +1,102 @@
+<script>
+  DrinkWithFriendsController.bars();
+  
+  function populateDB(tx) {
+    tx.executeSql('DROP TABLE IF EXISTS Bars');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS Bars (name, rating, desc, specials, icon_loc)');
+    tx.executeSql('INSERT INTO Bars (name, rating, desc, specials, icon_loc) VALUES ("Murphy\'s", 4, "lakdjfa", "$4 Leinenkugel Orange Shandy","/icons/barIcons/murphys.jpg")');
+    tx.executeSql('INSERT INTO Bars (name, rating, desc, specials, icon_loc) VALUES ("Clybourne", 3, "lakdsjflk", "$1 wells", "/icons/barIcons/clybourne.png")');
+    tx.executeSql('INSERT INTO Bars (name, rating, desc, specials, icon_loc) VALUES ("Blind Pig", 5, "Local craft brews and brewery", "Mug Night", "/icons/barIcons/blindPig.png")');
+    tx.executeSql('INSERT INTO Bars (name, rating, desc, specials, icon_loc) VALUES ("FireHaus", 3, "", "$1 wells", "/icons/barIcons/firehaus.png")');
+    tx.executeSql('INSERT INTO Bars (name, rating, desc, specials, icon_loc) VALUES ("Brothers", 5, "", "$2 Jager Bombs $1.50 High Life", "/icons/barIcons/brothers.png")');
+    tx.executeSql('INSERT INTO Bars (name, rating, desc, specials, icon_loc) VALUES ("Canopy Club", 4, "", "$4 Hennessey/Ginger ale", "/icons/barIcons/canopyClub.png")');
+    tx.executeSql('INSERT INTO Bars (name, rating, desc, specials, icon_loc) VALUES ("Legends", 2, "Bar and grill", "$2 All Drafts", "/icons/barIcons/legends.png")');
+    
+  }
+
+  function selectQuerySuccess(tx, results) {
+    var len = results.rows.length;
+    console.log("DEMO table: " + len + " rows found.");
+    var $barList = $("#bar-list");
+    for (var i=0; i<len; i++) {
+      var sqlBarResult = results.rows.item(i);
+      var barItem = document.createElement("li");
+      barItem.innerHTML = "<img src=" + sqlBarResult.icon_loc + " /><div class=\"bar-info\">" +
+        "<p>" + sqlBarResult.name + "  Rating: " + sqlBarResult.rating + "/5 </p><p>" +
+        sqlBarResult.specials + "</p>";
+      barItem.addEventListener("click", function(e) {
+        var barPage = new steroids.views.WebView({
+          location: ("http://localhost/views/DrinkWithFriends/barPage.html?barName=" + sqlBarResult.name)
+        });
+        steroids.layers.push({
+          view: barPage
+        });
+      });
+      $barList.append(barItem);
+    }
+  }
+  
+  function getBars(tx) {
+    tx.executeSql('SELECT * FROM Bars', [], selectQuerySuccess);
+  }
+  
+  function errorCB(err) {
+    alert("Error processing SQL: "+err.code);
+  }
+  
+  function successCB() {
+  }
+
+  document.addEventListener("deviceready", onDeviceReady, false);
+  function onDeviceReady() {
+    var db = window.openDatabase("bars", "1.0", "Bars DB", 1000000);
+	db.transaction(populateDB, errorCB, successCB);
+	db.transaction(getBars, errorCB);
+  }
+</script>
+
+<style>
+  input[type="text"] {
+    /* css 3 */
+    border-radius:3px;
+    /* mozilla */
+    -moz-border-radius:3px;
+    /* webkit */
+    -webkit-border-radius:3px;
+  }
+  
+  ::-webkit-input-placeholder {
+    color: grey;
+    text-align: center;
+  }
+  
+  #search-area {
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+    padding: 10px auto;
+    width: 100%;
+  }
+  
+  #bar-list li {
+    height: 70px;
+  }
+  #bar-list li img {
+    border-radius: 30px;
+    display: inline-block;
+    height: 60px;
+    width: 60px;
+  }
+  #bar-list li div {
+    display: inline-block;
+    padding: 5px;
+  }
+</style>
+
+<div id="search-area">
+  <a>Filter</a>
+  <input type="text" placeholder="Search">
+  <a>TODO</a> <!-- Search icon here -->
+</div>
+
+<ul id="bar-list">
+</ul>

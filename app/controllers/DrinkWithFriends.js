@@ -1,8 +1,7 @@
-steroids.tabBar.show();
+//steroids.tabBar.show();
 window.DrinkWithFriendsController = {
 
   index: function () {
-    steroids.view.navigationBar.show("Welcome page");
   },
 
   show: function () {
@@ -23,8 +22,12 @@ window.DrinkWithFriendsController = {
   },
   
   bars: function () {
-  	// Do stuff  
-  }
+  },
+  
+  barPage: function () {
+
+  },
+  
    addFriend: function () {
 
     // Fetch a value from query parameters ?id=x

@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf8">
-    <meta name="viewport" content="width=device-width">
-    <title>Add Friend</title>
-
-	<script src="components/jquery/jquery.min.js"></script>
-    <script src="vendor/hammerjs/jquery.hammer.min.js"></script>
-	<script src="http://localhost/cordova.js"></script>
-	<script src="components/steroids-js/steroids.js"></script>
-    <script src="javascripts/onerror.js"></script>
-    <script src="javascripts/console.log.js"></script>
-    <link rel="stylesheet" href="vendor/topcoat/css/topcoat-mobile-light.css" />
-    <link rel="stylesheet" href="stylesheets/application.css" />
-	
-	<script>
+<script>
 	  DrinkWithFriendsController.index(); 	
 	    
   var db;
@@ -95,21 +79,17 @@
 	  }
 		$('#status').hide();
 	}
-	</script>  
-	
-  </head>
-  <body>
+</script>  
+
 	<div id="header" class="header">
 		<h1>Add Friend</h1>
 	</div>
 	<div id="header2">
 		<a class="topcoat-button" id="add">ADD SELECTED</a> <a class="topcoat-button" id="cancel">CANCEL</a>
 	</div>
-	<FORM name="selectFriends">
+	<form name="selectFriends">
 	<div id="wrapper">
 		<ul id="newFriendList" class="icon-list"></ul>
 	</div>
-	<div id="busy"/>Loading...</div>
-	</FORM>
-  </body>
-</html>
+	<div id="busy">Loading...</div>
+	</form>

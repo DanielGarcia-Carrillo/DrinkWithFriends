@@ -11,22 +11,18 @@ steroids.config.tabBar.enabled = true
 steroids.config.tabBar.tabs = [
   {
     title: "First"
-    icon: "icons/pill@2x.png"
     location: "http://localhost/first.html"
   },
   {
-    title: "Index"
-    icon: "icons/pill@2x.png"
-    location: "http://localhost/views/DrinkWithFriends/index.html"
+    title: "Bars"
+    location: "http://localhost/views/DrinkWithFriends/barList.html"
   },
   {
     title: "Check-In"
-    icon: "icons/telescope@2x.png"
     location: "http://localhost/views/DrinkWithFriends/checkIn.html"
   }
   {
     title: "Friends"
-    icon: "icons/telescope@2x.png"
     location: "http://localhost/views/DrinkWithFriends/friendList.html"
   }
 ]

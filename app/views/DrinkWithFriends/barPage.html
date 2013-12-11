@@ -1,0 +1,26 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var barName = steroids.view.params.barName;
+    var db = window.openDatabase("bars", "1.0", "Bars DB", 1000000);
+    db.transaction(function (tx) {
+      tx.executeSql('SELECT * FROM Bars WHERE name = ?', [barName], function(tx, result) {
+        if (result.rows.length !== 1) {
+          alert("problem");
+        }
+        var barInfo = result.rows.item(0);
+        $("#bar-icon").src = barInfo.icon_loc;
+        $("#bar-name").innerHTML = barInfo.name;
+      });
+    });
+  });
+</script>
+
+<style>
+  #bar-icon {
+    margin: auto;
+  }
+</style>
+
+<img id="bar-icon">
+<h1 id="bar-name"></h1>
+<p id="description"></p>
