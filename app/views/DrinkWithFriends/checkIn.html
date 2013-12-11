@@ -1,24 +1,44 @@
 <script>
-  DrinkWithFriendsController.index();  
-</script>
-<style>
-  input[type="submit"] {
-  	margin: inherit auto;  
+  DrinkWithFriendsController.index(); 
+
+  function selectQuerySuccess(tx, results) {
+    var $barInfo = $("#wrapper");
+  var sqlBarResult = results.rows.item(0);
+  var barItem = document.createElement("div");
+  barItem.innerHTML = "<img src=" + sqlBarResult.icon_loc + " /><div class=\"bar-info\">" +
+  "<p>" + sqlBarResult.name + "  Rating: " + sqlBarResult.rating + "/5 </p><p>" +
+  sqlBarResult.specials + "</p>";
+
+  $barInfo.append(barItem);
+  } 
+
+  function getBar(tx) {
+    tx.executeSql('SELECT * FROM Bars', [], selectQuerySuccess);
   }
+
+  var db = window.openDatabase("bars", "1.0", "Bars DB", 1000000);
+  db.transaction(getBar, errorCB);
+
+  function errorCB(err) {
+    alert("Error processing SQL: "+err.code);
+  }
+</script>
+
+<style>
+  #wrapper img {
+      border-radius: 30px;
+      display: inline-block;
+      height: 60px;
+      width: 60px;
+    }
 </style>
-  <div class="content-padded">
-    <h2>Check In</h2>
-	<FORM action="/views/DrinkWithFriends/checkedIn.html" method="post">
-    <P>
-	Where:<br>
-   	<input type="text" name="bar"><br>
-	With Who: <br>
-	<input type="text" name="withFriends"><br>
-	Cover time:<br>
-    <input type="range" name="cover"><br>	
-	Wait Time<br>
-    <input type="range" name="waitTime"><br><br>
-    <input type="submit" value="Submit">
-    </P>
- </FORM>
+
+<body>
+  <div id="header" class="header">
+    <a href="checkIn.html" class="nav">Back</a>
+    <h1>Checked In</h1>
   </div>
+  <div id = "wrapper">
+    <p>Congratulations, you are checked in!</p>
+  </div>
+</body>
