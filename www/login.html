@@ -17,13 +17,21 @@
   <!-- cordova.js is served from localhost to ensure the correct version -->
   <script src="http://localhost/cordova.js"></script>
   <script src="components/steroids-js/steroids.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(e) {
+      $("#login-submit").hammer().on("tap", function() {
+        steroids.modal.hide();
+        localStorage.setItem("firstVisit", "success");
+      });
+    });
+  </script>
 </head>
 <body>
   <div class="content-padded">
     <h2>Login Page</h2>
     <input type="email" placeholder="Email" /><br />
     <input type="password" placeholder="Password" /><br />
-    <a class="topcoat-button--cta">Login</a>
+    <a class="topcoat-button--cta" id="login-submit">Login</a>
   </div>
 </body>
 </html>

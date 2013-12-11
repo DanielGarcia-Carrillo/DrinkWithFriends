@@ -4,23 +4,19 @@
 steroids.config.name = "Drink with Friends"
 
 # -- Initial Location --
-steroids.config.location = "http://localhost/first.html"
+steroids.config.location = "http://localhost/views/DrinkWithFriends/checkIn.html"
 
 # -- Tab Bar --
 steroids.config.tabBar.enabled = true
 steroids.config.tabBar.tabs = [
   {
-    title: "First"
-    location: "http://localhost/first.html"
+    title: "Check-In"
+    location: "http://localhost/views/DrinkWithFriends/checkIn.html"
   },
   {
     title: "Bars"
     location: "http://localhost/views/DrinkWithFriends/barList.html"
   },
-  {
-    title: "Check-In"
-    location: "http://localhost/views/DrinkWithFriends/checkIn.html"
-  }
   {
     title: "Friends"
     location: "http://localhost/views/DrinkWithFriends/friendList.html"
