@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
    $('#friendList').hammer().on('tap', function() {
-    var checkInView = new steroids.views.WebView({
+    var friendListView = new steroids.views.WebView({
 		location: 'views/DrinkWithFriends/friendList.html'
 	});
     steroids.layers.push({
