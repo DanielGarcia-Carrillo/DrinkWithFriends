@@ -30,7 +30,7 @@
 		function getFriend_success(tx, results) {
 			$('#busy').hide();			
 			var friend = results.rows.item(0);
-			$('#friendIcon').attr('src', 'icons/' + friend.icon);
+			$('#friendIcon').attr('src', 'http://localhost/icons/friendIcons/' + friend.icon);
 			$('#fullName').text(friend.firstName + ' ' + friend.lastName);
 			$('#friendEmail').text(friend.email);
 		}
@@ -77,6 +77,7 @@
 	<div id="wrapper">
 	  	<div>
 	  		<div id="friendDetails">
+				<img id="friendIcon"/>
 	       		<h3 id="fullName"></h3>
 	       		<p id="friendEmail"></p>
 	  		</div> 
