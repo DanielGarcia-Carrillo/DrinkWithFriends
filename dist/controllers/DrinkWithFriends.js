@@ -20,6 +20,19 @@ window.DrinkWithFriendsController = {
   tabOn: function () {
     steroids.config.tabBar.enabled = true;
   },
+  
+   addFriend: function () {
+
+    // Fetch a value from query parameters ?id=x
+    var showId = steroids.view.params.id;
+    steroids.view.navigationBar.show("Add Friends");
+
+    // Just to demonstrate the control flow of the application, hook your own code here
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("show-id").textContent = showId;
+    });
+
+  },
 };
 
 

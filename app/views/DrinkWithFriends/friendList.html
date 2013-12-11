@@ -7,100 +7,28 @@
 
 	<script src="components/jquery/jquery.min.js"></script>
     <script src="vendor/hammerjs/jquery.hammer.min.js"></script>
+	<script src="http://localhost/cordova.js"></script>
 	<script src="components/steroids-js/steroids.js"></script>
     <script src="javascripts/onerror.js"></script>
     <script src="javascripts/console.log.js"></script>
     <link rel="stylesheet" href="vendor/topcoat/css/topcoat-mobile-light.css" />
     <link rel="stylesheet" href="stylesheets/application.css" />
-
-	<script>
-	  DrinkWithFriendsController.index();  
-
-    // Define our Database object
-    var db = null;
-
-    // Wait for Cordova to load
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    // Cordova is ready
-    function onDeviceReady() {
-      // Create a new database
-      db = window.openDatabase(
-        "FriendDatabase",       // database name
-        "1.0",            // database version
-        "Friend ListDB",   // database display name
-        200000            // database size in bytes
-      );
-
-      // populate the DB, then run a query
-      db.transaction(
-        populateDB,     // transaction to run; a SQLTransaction object is passed to the callback function
-        databaseError,  // error callback function
-        populatingDone  // success callback function; ran after the the transaction is done
-      );
-    }
-
-    function populateDB(tx) {
-      tx.executeSql('DROP TABLE IF EXISTS friends');
-	  var sql = 
-		"CREATE TABLE IF NOT EXISTS friends ( "+
-		"id unique, " +
-		"firstName VARCHAR(50), " +
-		"lastName VARCHAR(50), " +
-		"email VARCHAR(30))";
-      tx.executeSql(sql);
-	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email) VALUES (1,'Jessica','Mullins','jessica@gmail.com')");
-	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email) VALUES (2,'Daniel','Garcia-Carrillo','daniel@gmail.com')");  
-	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email) VALUES (3,'Helen','Zhou','helen@gmail.com')");  
-  	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email) VALUES (4,'Alex','Camargo','alex@gmail.com')");  
-
-	}
-
-    function populatingDone(){
-      var status = document.querySelector("#status");
-      status.innerText = "Database successfully created!"
-      db.transaction(queryDB, databaseError);
-    }
-
-
-    function runQuery() {
-      db.transaction(queryDB, databaseError);
-    }
-
-    // Query the database
-    function queryDB(tx) {
-      tx.executeSql('SELECT * FROM friends', [], gotQueryResults, databaseError);
-    }
-
-    // Show the results of the database query
-    function gotQueryResults(tx, results) {
-	var len = results.rows.length;
-      var result = "";
-      result += ("friends table: " + len + " rows found. \n\n");
-      for (var i=0; i<len; i++){
-		var friend = results.rows.item(i);
-		$('#friendList').append('<li>' +
-					'<p class="line1">' + friend.firstName + ' ' + friend.lastName + '</p>' +
-					'<p class="line2">' + friend.email + '</p>' +
-					'<span class="bubble"' + len + '</span></li>');
-		}
-		$('#status').hide();
-	}
-
-    // Transaction error callback
-    function databaseError(err) {
-      alert("Error code: " + err.code + "; message: " + err.message);
-    }
 	
+	<script src="http://localhost/javascripts/buildFriendList.js"></script>
+	
+	<script>
+	  DrinkWithFriendsController.index(); 	
 	</script>  
+	
   </head>
   <body>
-    <div class="content-padded">
-      <h1>Friends List</h1>
-      <span id="status">Loading...</span>
-    </div>
-	<div id="wrapper">
-		<ul id="friendList" class="icon-list"></ul>
+	<div id="header" class="header">
+	<a href="addFriend.html" class="action">Add+</a>
+		<h1>Friend List</h1>
 	</div>
+	<div id="wrapper">
+		<ul id="friendList" class="icon-list" data-filter="true"></ul>
+	</div>
+	<div id="busy"/>Loading...</div>
   </body>
 </html>
