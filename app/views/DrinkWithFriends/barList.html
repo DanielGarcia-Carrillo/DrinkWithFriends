@@ -24,14 +24,14 @@
       barItem.innerHTML = "<img src=" + sqlBarResult.icon_loc + " /><div class=\"bar-info\">" +
         "<p>" + sqlBarResult.name + "  Rating: " + sqlBarResult.rating + "/5 </p><p>" +
         sqlBarResult.specials + "</p>";
-      barItem.addEventListener("click", function(e) {
-        var barPage = new steroids.views.WebView({
-          location: ("http://localhost/views/DrinkWithFriends/barPage.html?barName=" + sqlBarResult.name)
-        });
-        steroids.layers.push({
-          view: barPage
-        });
-      });
+//      barItem.addEventListener("click", function(e) {
+//        var barPage = new steroids.views.WebView({
+//          location: ("http://localhost/views/DrinkWithFriends/barPage.html?barName=" + sqlBarResult.name)
+//        });
+//        steroids.layers.push({
+//          view: barPage
+//        });
+//      });
       $barList.append(barItem);
     }
   }
