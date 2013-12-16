@@ -53,7 +53,6 @@ window.DrinkWithFriendsController = {
 		"favoriteDrink VARCHAR(50), " +
 		")";
       tx.executeSql(sql);
-	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon,isFriend,lastSeen,findMe,favoriteDrink) VALUES (0,'Pamela','Kim','pamela@gmail.com','pamela.png',3,''Iron Post','Bartini','Mango Mojito')");
 	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon,isFriend,lastSeen,findMe,favoriteDrink) VALUES (1,'Jessica','Mullins','jessica@gmail.com','jess.jpg',1,'Murphys','Bartini','Shirley Temple')");
 	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon,isFriend,lastSeen,findMe,favoriteDrink) VALUES (2,'Daniel','Garcia-Carrillo','daniel@gmail.com','daniel.jpg',1,'Rock Bottom','BWW','PBR')");  
 	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon,isFriend,lastSeen,findMe,favoriteDrink) VALUES (3,'Helen','Zhou','helen@gmail.com','helen.jpg',1,'ChaChaCha','Bartini','Wine')");  

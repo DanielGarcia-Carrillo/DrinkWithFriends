@@ -20,6 +20,10 @@ steroids.config.tabBar.tabs = [
   {
     title: "Friends"
     location: "http://localhost/views/DrinkWithFriends/friendList.html"
+  },
+  {
+    title: "Profile"
+    location: "http://localhost/views/DrinkWithFriends/profile.html"
   }
 ]
 
