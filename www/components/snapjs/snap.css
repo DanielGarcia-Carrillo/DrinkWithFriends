@@ -43,7 +43,7 @@
 
 #open-left {
   background: url(/components/snapjs/open.png) center center no-repeat !important;
-  display: block;
+  display: inline-block;
   width: 44px;
   height: 44px;
 }

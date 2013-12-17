@@ -122,8 +122,11 @@ li .action-icon {
 }
 
 #toolbar .action {
-	position: absolute;
-	height:100%;
+  display: inline-block;
+  float: right;
+  margin-top: 14px;
+  width: 44px;
+  height: 44px;
 }
 
 .header a { 
