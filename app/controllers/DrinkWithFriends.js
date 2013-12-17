@@ -28,9 +28,9 @@ window.DrinkWithFriendsController = {
   checkIn: function () {
     
     steroids.navigationBar.hide();
-	if (localStorage.getItem("firstVisit") && localStorage.getItem("firstVisit") == "success") {
+	if (localStorage.getItem("signIn") && localStorage.getItem("signIn") == "success") {
     } else {
-      localStorage.setItem("firstVisit", "false");
+      localStorage.setItem("signIn", "false");
       var signupLoginView = new steroids.views.WebView("http://localhost/first.html");
 	  steroids.modal.show(signupLoginView);
     }
