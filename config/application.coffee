@@ -7,7 +7,7 @@ steroids.config.name = "Drink with Friends"
 steroids.config.location = "http://localhost/views/DrinkWithFriends/checkIn.html"
 
 # -- Tab Bar --
-steroids.config.tabBar.enabled = true
+steroids.config.tabBar.enabled = false
 steroids.config.tabBar.tabs = [
   {
     title: "Check-In"

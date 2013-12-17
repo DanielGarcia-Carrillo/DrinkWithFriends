@@ -6,6 +6,7 @@
 
   <link rel="stylesheet" href="/vendor/topcoat/css/topcoat-mobile-light.css" />
   <link rel="stylesheet" href="/stylesheets/application.css" />
+  <link rel="stylesheet" type="text/css" href="/components/snapjs/snap.css" />
 
   <script src="/javascripts/onerror.js"></script>
   <script src="/javascripts/console.log.js"></script>
@@ -16,15 +17,107 @@
   <script src="/components/jquery/jquery.min.js"></script>
   <script src="/vendor/hammerjs/jquery.hammer.min.js"></script>
   
-  <script src="/components/snap.js"></script>
-
+  <script src="/components/snapjs/snap.js"></script>
+  <script src="/components/snapjs/default.js"></script>
+  
   <script src="/models/models.js"></script>
 
   <script src="/controllers/<%= yield.controller %>.js"></script>
+  <script>steroids.navigationBar.hide();</script>
 </head>
 <body>
 
-  <%= yield.view %>
+  <div class="snap-drawers">
+    <div class="snap-drawer snap-drawer-left">
+      <div>
+        <h4>Drink with Friends</h4>
+        <ul>
+          <li><a id="profile-open">Profile</a></li>
+          <li><a id="settings-open">Settings</a></li>
+          <li><a id="bars-open">Bars</a></li>
+          <li><a id="checkin-open">Check in</a></li>
+          <li><a id="friends-open">Friends</a></li>
+          <li><a id="sign out">Sign out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="content" class="snap-content">
+    <div id="toolbar">
+      <a id="open-left"></a>
+      <h1 id="toolbar-header">Check in</h1>
+    </div>
+  	<%= yield.view %>
+  </div>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function(e) {
+      steroids.navigationBar.hide();
+      var snapper = new Snap({
+  		element: document.getElementById('content'),
+        disable: 'right'
+	  });
+      $('#open-left').hammer().on('tap', function(e) {
+        if (snapper.state().state == 'closed') {
+          snapper.open('left');
+        } else {
+          snapper.close();
+        }
+      });
+      
+      $('#bars-open').hammer().on('tap', function(e) {
+        // TODO won't work because html is reloaded on view push
+        $('#toolbar-header').innerHTML = 'Bars';
+        var barsView = new steroids.views.WebView({
+          location: 'http://localhost/views/DrinkWithFriends/barList.html'
+        });        
+//        barsView.preload({}, {
+//          onSuccess: function() {
+            steroids.layers.push({
+              view: barsView
+            });
+//          }
+//        });
+      });
+      
+      $('#checkin-open').hammer().on('tap', function(e) {
+        $('#toolbar-header').innerHTML = 'Check In';
+        var checkinView = new steroids.views.WebView({
+          location: 'http://localhost/views/DrinkWithFriends/checkIn.html'
+        });
+//        checkinView.preload({}, {
+//          onSuccess: function() {
+            steroids.layers.push({
+              view: checkinView
+            });
+//          }
+//        });
+      });
+      
+      $('#friends-open').hammer().on('tap', function(e) {
+        $('#toolbar-header').innerHTML = 'Friends';
+        var friendsView = new steroids.views.WebView({
+          location: 'http://localhost/views/DrinkWithFriends/friendList.html'
+        });
+//        friendsView.preload({}, {
+//          onSuccess: function() {
+            steroids.layers.push({
+              view: friendsView
+            });
+//          }
+//        });
+      });
+      
+      $('#profile-open').hammer().on('tap', function(e) {
+        $('#toolbar-header').innerHTML = 'Profile';
+        var profileView = new steroids.views.WebView({
+          location: 'http://localhost/views/DrinkWithFriends/profile.html'
+        });
+        steroids.layers.push({
+          view: profileView
+        });
+      });
+    });
+  </script>
 </body>
 </html>
