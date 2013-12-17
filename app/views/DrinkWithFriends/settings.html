@@ -1,0 +1,125 @@
+<script>
+  DrinkWithFriendsController.checkIn();
+  
+  function bars(tx, results) {
+    var itemsLength = results.rows.length;
+    var $placesSelect = $("#place-select");
+    for (var i=0; i < itemsLength; i++) {
+      var currentItem = results.rows.item(i);
+      var bar = currentItem.name;
+      $placesSelect.append(
+        $("<option></option>")
+         .attr("value",currentItem.id)
+         .text(bar)
+      );
+    }
+  }
+  
+  function populateBarsSelect(tx) {
+    tx.executeSql('SELECT name FROM Bars ORDER BY UPPER(name)', [], function(tx, results) {
+      if (document.readyState == "complete") {
+        bars(tx, results);
+      } else {
+        document.addEventListener('DOMContentLoaded', function(e) {
+          bars(tx, results);
+        });
+      }
+    });
+  }
+  
+  function friends(tx, results) {
+    var itemsLength = results.rows.length;
+    var $friendSelect = $('#friends-select');
+    for (var i=0; i < itemsLength; i++) {
+      var currentItem = results.rows.item(i);
+      var name = currentItem.firstName + ' ' + currentItem.lastName;
+      $friendSelect.append(
+        $("<option></option>")
+         .attr("value",currentItem.id)
+         .text(name)
+	  );
+    }
+  }
+  
+  function populateFriendsSelect(tx) {
+    tx.executeSql('SELECT firstName,lastName,id FROM friends ORDER BY UPPER(firstName)', [], function(tx, results) {
+      if (document.readyState == "complete") {
+        friends(tx, results);
+      } else {
+        document.addEventListener('DOMContentLoaded', function(e) {
+          friends(tx, results);
+        });
+      }
+    });
+  }
+  
+  document.addEventListener("deviceready", onDeviceReady, false);
+  function onDeviceReady() {
+    var db = window.openDatabase(
+      "FriendDatabase",       // database name
+      "1.0",            // database version
+      "Friend ListDB",   // database display name
+      200000            // database size in bytes
+    );
+    db.transaction(populateFriendsSelect);
+    
+    db = window.openDatabase("bars", "1.0", "Bars DB", 1000000);
+    db.transaction(populateBarsSelect);
+  }
+</script>
+<style>
+  input[type="submit"] {
+          margin: inherit auto;  
+  }
+</style>
+	<div id="header" class="header">
+		<a href="profile.html" class="nav">Back</a>
+		<h1>Privacy Settings</h1>
+	</div>
+	<div id="header2">
+		<h2>Pamela Kim</h2>
+	</div>
+	<div id="wrapper">
+	<form action="profile.html" method="post">
+	<ul>
+	<li>
+		<img src="http://localhost/icons/friendIcons/pamela.png"></img>
+	    <h3>Pamela Kim</h3>
+	     <p>pamela@gmail.com</p>
+	</li>
+	<li>
+		<h2>Who can see my current location?</h2>
+		<select id="friends-select" multiple></select><br>
+		<h2>Who can see my favorites?</h2>
+		<select id="friends-select" multiple></select><br>
+		<h2>Who can see my tags?</h2>
+		<select id="friends-select" multiple></select><br>
+	</li>
+	<li>
+		<h2>Profile Status</h2>
+		<select id="status">
+			<option value="public">Public</option>
+			<option value="friends">Friends Only</option>
+			<option value="private">Private</option>
+		</select>
+		<h2>Notification Settings</h2>
+		<select id="notifications">
+			<option value="public">Send to everyone</option>
+			<option value="friends">Send to friends</option>
+			<option value="private">Turn off notifications</option>
+		</select>
+		<h2>Facebook Connection</h2>
+		<select id="facebook">
+			<option value="connect">Connect</option>
+			<option value="disconnect">Disconnect</option>
+		</select>
+		<h2>Blocked List</h2>
+		<select id="blockedList">
+			<option value="avoid">Avoid Messages</option>
+			<option value="noContact">No Contact</option>
+		</select>
+	</li>
+	</ul>
+	<input type="submit" value="Submit">
+	</form>
+	</div>

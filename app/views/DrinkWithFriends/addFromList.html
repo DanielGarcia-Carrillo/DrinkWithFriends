@@ -3,17 +3,27 @@
 	    
   var db;
   var selectedId = 0;
+  var addFriendSQL;
+ 
   document.addEventListener("deviceready", onDeviceReady, false);
   document.addEventListener('DOMContentLoaded', function() {
 	  $('#add').hammer().on('tap', function() {
 		var checkboxes = document.getElementsByName('addFriend');
+		var or = false;
+		addFriendSQL = "UPDATE friends SET isFriend = 1 WHERE id=";
 		for (var i=0, n=checkboxes.length;i<n;i++) {
 		  if (checkboxes[i].checked) 
 		  {
 			selectedId = checkboxes[i].value;
-			db.transaction(addToFriends, transaction_error);
+			if (or)
+			{
+				addFriendSQL += " OR id=";
+			}
+			addFriendSQL += selectedId;
+			or = true;
 		  }
 		}
+		db.transaction(addToFriends, transaction_error);
 		var friendsListView = new steroids.views.WebView({
 		location: 'views/DrinkWithFriends/friendList.html'
 		});
@@ -35,8 +45,7 @@
 	
 	function addToFriends(tx)
 	{
-		var sql = "UPDATE friends SET isFriend = 1 WHERE id=" + selectedId;
-	   tx.executeSql(sql);
+	   tx.executeSql(addFriendSQL);
 	}
 	
 	function onDeviceReady() {
