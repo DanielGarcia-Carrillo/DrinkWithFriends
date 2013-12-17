@@ -6,12 +6,7 @@
 
 		function onDeviceReady() {
 			console.log("opening database");
-			db = window.openDatabase(
-			"FriendDatabase",       // database name
-			"1.0",            // database version
-			"Friend ListDB",   // database display name
-			200000            // database size in bytes
-			);
+			db = window.openDatabase("FriendDatabase", "1.0","Friend ListDB", 200000);
 			console.log("database opened");
 			db.transaction(getFriend, transaction_error);
 		}
@@ -49,6 +44,10 @@
 			}
 			return vars;
 		}
+	
+	document.addEventListener('DOMContentLoaded', function() {
+		$('#toolbar-header').text('Drink With Friends');
+	});
 	</script>
 <!--
         
@@ -60,7 +59,6 @@
 		<h2>Friend Details</h2>
 	</div>
 -->
-	
 	<div id="wrapper">
 	  	<div>
 	  		<div id="friendDetails">
