@@ -3,15 +3,19 @@
 	
 	<script>
 	  DrinkWithFriendsController.index(); 	
+      document.addEventListener('DOMContentLoaded', function() {
+        $('#toolbar-header').text('Friends');
+        $('#toolbar').append('<a href="addFriend.html" class="action">Add+</a>');
+      });
 	</script>  
-<!--
 
+<!--
 	<div id="header" class="header">
--->
 	<a href="addFriend.html" class="action">Add+</a>
 		<h1>Friend List</h1>
 	</div>
-	<div>
+-->
+	<div id="wrapper">
 		<ul id="friendList" class="icon-list" data-filter="true"></ul>
 	</div>
 	<div id="busy"/>Loading...</div>

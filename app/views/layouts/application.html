@@ -32,11 +32,11 @@
       <div>
         <h4>Drink with Friends</h4>
         <ul>
-          <li><a id="profile-open">Profile</a></li>
-          <li><a id="settings-open">Settings</a></li>
-          <li><a id="bars-open">Bars</a></li>
-          <li><a id="checkin-open">Check in</a></li>
-          <li><a id="friends-open">Friends</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="settings.html">Settings</a></li>
+          <li><a href="barList.html">Bars</a></li>
+          <li><a href="checkIn.html">Check In</a></li>
+          <li><a href="friendList.html">Friends</a></li>
           <li><a id="sign out">Sign out</a></li>
         </ul>
       </div>
@@ -45,7 +45,7 @@
   <div id="content" class="snap-content">
     <div id="toolbar">
       <a id="open-left"></a>
-      <h1 id="toolbar-header">Check in</h1>
+      <h1 id="toolbar-header"></h1>
     </div>
   	<%= yield.view %>
   </div>
@@ -63,59 +63,6 @@
         } else {
           snapper.close();
         }
-      });
-      
-      $('#bars-open').hammer().on('tap', function(e) {
-        // TODO won't work because html is reloaded on view push
-        $('#toolbar-header').innerHTML = 'Bars';
-        var barsView = new steroids.views.WebView({
-          location: 'http://localhost/views/DrinkWithFriends/barList.html'
-        });        
-//        barsView.preload({}, {
-//          onSuccess: function() {
-            steroids.layers.push({
-              view: barsView
-            });
-//          }
-//        });
-      });
-      
-      $('#checkin-open').hammer().on('tap', function(e) {
-        $('#toolbar-header').innerHTML = 'Check In';
-        var checkinView = new steroids.views.WebView({
-          location: 'http://localhost/views/DrinkWithFriends/checkIn.html'
-        });
-//        checkinView.preload({}, {
-//          onSuccess: function() {
-            steroids.layers.push({
-              view: checkinView
-            });
-//          }
-//        });
-      });
-      
-      $('#friends-open').hammer().on('tap', function(e) {
-        $('#toolbar-header').innerHTML = 'Friends';
-        var friendsView = new steroids.views.WebView({
-          location: 'http://localhost/views/DrinkWithFriends/friendList.html'
-        });
-//        friendsView.preload({}, {
-//          onSuccess: function() {
-            steroids.layers.push({
-              view: friendsView
-            });
-//          }
-//        });
-      });
-      
-      $('#profile-open').hammer().on('tap', function(e) {
-        $('#toolbar-header').innerHTML = 'Profile';
-        var profileView = new steroids.views.WebView({
-          location: 'http://localhost/views/DrinkWithFriends/profile.html'
-        });
-        steroids.layers.push({
-          view: profileView
-        });
       });
     });
   </script>

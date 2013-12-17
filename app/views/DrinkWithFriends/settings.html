@@ -66,16 +66,24 @@
     db = window.openDatabase("bars", "1.0", "Bars DB", 1000000);
     db.transaction(populateBarsSelect);
   }
+  document.addEventListener('DOMContentLoaded', function() {
+    $('#toolbar-header').text('Privacy Settings');
+  });
 </script>
 <style>
   input[type="submit"] {
           margin: inherit auto;  
   }
+  #wrapper {
+    top: 82px !important;
+  }
 </style>
+<!--
 	<div id="header" class="header">
 		<a href="profile.html" class="nav">Back</a>
 		<h1>Privacy Settings</h1>
 	</div>
+-->
 	<div id="header2">
 		<h2>Pamela Kim</h2>
 	</div>

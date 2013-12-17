@@ -66,6 +66,9 @@
     db = window.openDatabase("bars", "1.0", "Bars DB", 1000000);
     db.transaction(populateBarsSelect);
   }
+  document.addEventListener('DOMContentLoaded', function() {
+    $('#toolbar-header').text('Check In');
+  });
 </script>
 <style>
   input[type="submit"] {

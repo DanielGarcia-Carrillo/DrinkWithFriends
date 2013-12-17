@@ -19,11 +19,12 @@
 #toolbar {
   background: #fff;
   border-bottom: 1px solid #ccc;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
   width: auto;
+  z-index: 1000;
   height: 44px;
 }
 
@@ -78,36 +79,6 @@
         text-align: center;
 }
 
-/* Styles for expanding "Search" input in the "Expanding" demo */
-.search {
-        padding-bottom: 10px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-        -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
-           -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
-                box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-#search {
-        height: 30px;
-        width: 87%;
-        margin: 7px 7px 0 7px;
-        background: linear-gradient(#414A5A,#4C5464);
-        background: -webkit-linear-gradient(#414A5A,#4C5464);
-        padding-left: 15px;
-        border: 1px solid #222936;
-        -webkit-border-radius: 25px;
-           -moz-border-radius: 25px;
-                border-radius: 25px;
-        -webkit-box-shadow: inset 0 1px 2px -1px rgba(0, 0, 0, 0.5),0 1px 2px -1px rgba(255, 255, 255, 0.4);
-           -moz-box-shadow: inset 0 1px 2px -1px rgba(0, 0, 0, 0.5),0 1px 2px -1px rgba(255, 255, 255, 0.4);
-                box-shadow: inset 0 1px 2px -1px rgba(0, 0, 0, 0.5),0 1px 2px -1px rgba(255, 255, 255, 0.4);
-}
-
-#search:focus {
-        outline: none;
-        border-color: #151515;
-}
-
 /* Styles for fading out the drawer content in the "Expanding" demo */
 .drawer-inner {
         -webkit-transition: opacity 0.3s ease; 
@@ -138,14 +109,17 @@
 
 
 .snap-drawers {
-  background: #323949;
+  background: #323949 !important;
 }
 
-.snap-drawer {
+.snap-drawers .snap-drawer {
         background: #323949;
         color: #eee;
 }
 
+.snap-drawer li {
+  background: #323949 !important;
+}
 .snap-drawer h3 {
   font-size: 36px;
   font-weight: normal;
@@ -166,8 +140,10 @@
 
 .snap-drawer li > a {
   display: block;
+/*
   border-bottom: 1px solid rgba(0,0,0, 0.1);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+*/
   padding: 15px;
   font-weight: bold;
   text-shadow: 0 1px 0 #000;
