@@ -6,6 +6,7 @@
 
   <link rel="stylesheet" href="/vendor/topcoat/css/topcoat-mobile-light.css" />
   <link rel="stylesheet" href="/stylesheets/application.css" />
+  <link rel="stylesheet" type="text/css" href="/components/snapjs/snap.css" />
 
   <script src="/javascripts/onerror.js"></script>
   <script src="/javascripts/console.log.js"></script>
@@ -16,15 +17,37 @@
   <script src="/components/jquery/jquery.min.js"></script>
   <script src="/vendor/hammerjs/jquery.hammer.min.js"></script>
   
-  <script src="/components/snap.js"></script>
-
+  <script src="/components/snapjs/snap.js"></script>
+  <script src="/components/snapjs/default.js"></script>
+  
   <script src="/models/models.js"></script>
 
   <script src="/controllers/DrinkWithFriends.js"></script>
+  <script>steroids.navigationBar.hide();</script>
 </head>
 <body>
 
-  <script>
+  <div class="snap-drawers">
+    <div class="snap-drawer snap-drawer-left">
+      <div>
+        <h4>Drink with Friends</h4>
+        <ul>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="checkIn.html">Check In</a></li>
+          <li><a href="barList.html">Bars</a></li>
+          <li><a href="friendList.html">Friends</a></li>
+          <li><a href="settings.html">Settings</a></li>
+          <li><a href="checkIn.html" onclick="localStorage.setItem('signIn', 'false'); return true;">Sign out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="content" class="snap-content">
+    <div id="toolbar">
+      <a id="open-left"></a>
+      <h1 id="toolbar-header"></h1>
+    </div>
+  	<script>
   DrinkWithFriendsController.index();
 </script>
 
@@ -38,6 +61,23 @@
     </li>
   </ul>
 </div>
+  </div>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function(e) {
+      steroids.navigationBar.hide();
+      var snapper = new Snap({
+  		element: document.getElementById('content'),
+        disable: 'right'
+	  });
+      $('#open-left').hammer().on('tap', function(e) {
+        if (snapper.state().state == 'closed') {
+          snapper.open('left');
+        } else {
+          snapper.close();
+        }
+      });
+    });
+  </script>
 </body>
 </html>

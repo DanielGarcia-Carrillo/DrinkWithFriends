@@ -123,7 +123,11 @@ li .action-icon {
 
 #toolbar .action {
 	position: absolute;
-	height:100%;
+	left: 12px;
+	padding-top: 12px;
+	padding-right: 12px;
+	border-right: solid 1px #333333;
+	height: 40px;
 }
 
 .header a { 
@@ -159,4 +163,35 @@ li .action-icon {
 	bottom: 0px;
 	width: 100%;
 	overflow: auto;
-} 
+}
+
+
+#header3 {
+	position: absolute;
+	padding-top: 10px;
+	padding-left: 8px;
+	background: #ECEFF2; /* for non-css3 browsers */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FBFBFB), color-stop(100%,#ECEFF2));
+	color: #000000;
+	font-weight: bold;
+	top: 41px; 
+	height: 50px;
+	left: 0px;
+	right: 0px;
+	border-bottom: solid 1px #C8CBCE;
+	z-index:1;
+}
+
+#header3 > h2 {
+	font-size: 14px;
+	padding:0px;
+	margin:0px;
+}
+
+#wrapper2 {
+	position: absolute; 
+	top: 84px; 
+	bottom: 0px;
+	width: 100%;
+	overflow: auto;
+}

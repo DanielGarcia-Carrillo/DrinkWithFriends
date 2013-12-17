@@ -28,9 +28,9 @@ window.DrinkWithFriendsController = {
   checkIn: function () {
     
     steroids.navigationBar.hide();
-	if (localStorage.getItem("firstVisit") && localStorage.getItem("firstVisit") == "success") {
+	if (localStorage.getItem("signIn") && localStorage.getItem("signIn") == "success") {
     } else {
-      localStorage.setItem("firstVisit", "false");
+      localStorage.setItem("signIn", "false");
       var signupLoginView = new steroids.views.WebView("http://localhost/first.html");
 	  steroids.modal.show(signupLoginView);
     }
@@ -87,10 +87,10 @@ window.DrinkWithFriendsController = {
         populatingDone  // success callback function; ran after the the transaction is done
       );
       
-      db = window.openDatabase("bars", "1.0", "Bars DB", 1000000);
+      db = window.openDatabase("barsdb", "1.0", "BarsDB", 1000000);
       db.transaction(function(tx) {
         tx.executeSql('DROP TABLE IF EXISTS Bars');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS Bars (id, name, rating, desc, specials, icon_loc)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Bars (id unique, name, rating, desc, specials, icon_loc)');
         tx.executeSql('INSERT INTO Bars (id, name, rating, desc, specials, icon_loc) VALUES (1,"Murphy\'s", 4, "lakdjfa", "$4 Leinenkugel Orange Shandy","/icons/barIcons/murphys.jpg")');
         tx.executeSql('INSERT INTO Bars (id, name, rating, desc, specials, icon_loc) VALUES (2,"Clybourne", 3, "lakdsjflk", "$1 wells", "/icons/barIcons/clybourne.png")');
         tx.executeSql('INSERT INTO Bars (id, name, rating, desc, specials, icon_loc) VALUES (3,"Blind Pig", 5, "Local craft brews and brewery", "Mug Night", "/icons/barIcons/blindPig.png")');
