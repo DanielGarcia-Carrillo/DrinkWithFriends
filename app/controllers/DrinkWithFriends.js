@@ -56,7 +56,7 @@ window.DrinkWithFriendsController = {
 	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon,isFriend,lastSeen,findMe,favoriteDrink) VALUES (1,'Jessica','Mullins','jessica@gmail.com','jess.jpg',1,'Murphys','Bartini','Shirley Temple')");
 	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon,isFriend,lastSeen,findMe,favoriteDrink) VALUES (2,'Daniel','Garcia-Carrillo','daniel@gmail.com','daniel.jpg',1,'Rock Bottom','BWW','PBR')");  
 	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon,isFriend,lastSeen,findMe,favoriteDrink) VALUES (3,'Helen','Zhou','helen@gmail.com','helen.jpg',1,'ChaChaCha','Bartini','Wine')");  
-  	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon,isFriend,lastSeen,findMe,favoriteDrink) VALUES (4,'Alex','Camargo','alex@gmail.com','alex.jpg',1,'Murphy's','Joes','Whiskey')");  
+  	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon,isFriend,lastSeen,findMe,favoriteDrink) VALUES (4,'Alex','Camargo','alex@gmail.com','alex.jpg',1,'Murphys','Joes','Whiskey')");  
 	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon,isFriend,lastSeen,findMe,favoriteDrink) VALUES (5,'Adam','Smith','adam@gmail.com','adam.jpg',0,'Cheers','The Blind Pig','Whatever is cheapest')");
 	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon,isFriend,lastSeen,findMe,favoriteDrink) VALUES (6,'Katie','Jones','katie@gmail.com','katie.jpg',0,'Cowboy Monkey','Cheers','Guinness')");  
 	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon,isFriend,lastSeen,findMe,favoriteDrink) VALUES (7,'Emma','Preston','emma@gmail.com','emma.jpg',0,'Twisted','Twisted','Rum and Coke')");  
