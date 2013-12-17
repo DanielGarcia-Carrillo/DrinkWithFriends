@@ -1,7 +1,7 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     var barName = steroids.view.params.barName;
-    var db = window.openDatabase("bars", "1.0", "Bars DB", 1000000);
+    var db = window.openDatabase("barsdb", "1.0", "BarsDB", 1000000);
     db.transaction(function (tx) {
       tx.executeSql('SELECT * FROM Bars WHERE name = ?', [barName], function(tx, result) {
         if (result.rows.length !== 1) {

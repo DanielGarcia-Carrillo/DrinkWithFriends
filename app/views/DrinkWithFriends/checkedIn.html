@@ -3,27 +3,31 @@
 
   function selectQuerySuccess(tx, results) {
     var $barInfo = $("#wrapper");
-  var sqlBarResult = results.rows.item(0);
-  var barItem = document.createElement("div");
-  barItem.innerHTML = "<img src=" + sqlBarResult.icon_loc + " /><div class=\"bar-info\">" +
-  "<p>" + sqlBarResult.name + "  Rating: " + sqlBarResult.rating + "/5 </p><p>" +
-  sqlBarResult.specials + "</p>";
-
-  $barInfo.append(barItem);
-  $barInfo.append('<a href="checkIn.html" class="topcoat-button" id="checkout">Check out</a>');
-
+    var sqlBarResult = results.rows.item(0);
+    var barItem = document.createElement("div");
+    barItem.innerHTML = "<img src=" + sqlBarResult.icon_loc + " /><div class=\"bar-info\">" +
+      "<p>" + sqlBarResult.name + "  Rating: " + sqlBarResult.rating + "/5 </p><p>" +
+      sqlBarResult.specials + "</p>";
+    
+    $barInfo.append(barItem);
+    $barInfo.append('<a href="checkIn.html" onclick="localStorage.setItem(\'checkedIn\',\'false\');" class="topcoat-button" id="checkout">Check out</a>');
   } 
 
   function getBar(tx) {
-    tx.executeSql('SELECT * FROM Bars', [], selectQuerySuccess);
+    tx.executeSql('SELECT * FROM Bars WHERE id='+steroids.view.params.bar_id, [], selectQuerySuccess);
   }
 
-  var db = window.openDatabase("bars", "1.0", "Bars DB", 1000000);
-  db.transaction(getBar, errorCB);
 
   function errorCB(err) {
     alert("Error processing SQL: "+err.code);
   }
+  document.addEventListener('DOMContentLoaded', function() {   
+    var db = window.openDatabase("barsdb", "1.0", "BarsDB", 1000000);
+    db.transaction(getBar, errorCB);
+    
+    $('#toolbar-header').text('Checked In');
+    localStorage.setItem('checkedIn', 'true');
+  });
 </script>
 
 <style>
@@ -35,13 +39,6 @@
     }
 </style>
 
-<body>
-  <div id="header" class="header">
-    <a href="checkIn.html" class="nav">Back</a>
-    <h1>Checked In</h1>
-  </div>
-  <div id="wrapper">
+  <div id="wrapper" class="content-padded">
     <p>Congratulations, you are checked in!</p>
   </div>
-
-</body>

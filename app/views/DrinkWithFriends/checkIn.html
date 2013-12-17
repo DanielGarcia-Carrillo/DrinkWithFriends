@@ -9,14 +9,14 @@
       var bar = currentItem.name;
       $placesSelect.append(
         $("<option></option>")
-         .attr("value",currentItem.id)
+         .attr("value", currentItem.id)
          .text(bar)
       );
     }
   }
   
   function populateBarsSelect(tx) {
-    tx.executeSql('SELECT name FROM Bars ORDER BY UPPER(name)', [], function(tx, results) {
+    tx.executeSql('SELECT * FROM Bars ORDER BY UPPER(name)', [], function(tx, results) {
       if (document.readyState == "complete") {
         bars(tx, results);
       } else {
@@ -63,7 +63,7 @@
     );
     db.transaction(populateFriendsSelect);
     
-    db = window.openDatabase("bars", "1.0", "Bars DB", 1000000);
+    db = window.openDatabase("barsdb", "1.0", "BarsDB", 1000000);
     db.transaction(populateBarsSelect);
   }
   document.addEventListener('DOMContentLoaded', function() {
@@ -77,17 +77,17 @@
 </style>
   <div class="content-padded">
     <h2>Check In</h2>
-        <form action="/views/DrinkWithFriends/checkedIn.html" method="post">
-    <p>
+    <form action="checkedIn.html" id="checkin-form">
+      <p>
         Where:<br>
-      	<select id="place-select" required></select><br>
+        <select id="place-select" name="bar_id" required></select><br>
         With Who: <br>
-      	<select id="friends-select" multiple></select><br>
+        <select id="friends-select" name="friend_id" multiple></select><br>
         Cover cost:<br>
-    	Free <input type="range" name="cover">$20<br> <br>       
+        Free <input type="range" name="cover">$20<br> <br>       
         Wait Time<br>
-    None <input type="range" name="waitTime"> 40 min<br><br>
-    <input type="submit" value="Submit">
-    </p>
- </form>
-  </div>
+        None <input type="range" name="waitTime"> 40 min<br><br>
+        <input type="submit" value="Submit">
+      </p>
+    </form>
+</div>
