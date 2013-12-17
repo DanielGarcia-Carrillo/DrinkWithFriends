@@ -24,6 +24,9 @@ window.DrinkWithFriendsController = {
   
   bars: function () {
   },
+
+  news: function () {
+  },
   
   checkIn: function () {
     

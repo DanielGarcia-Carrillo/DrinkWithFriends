@@ -1,14 +1,27 @@
 <script>
-    DrinkWithFriendsController.index();
-      document.addEventListener('DOMContentLoaded', function() {
-        $('#toolbar-header').text('News');
-      });
-  </script>
+  DrinkWithFriendsController.news();
+  
+  function checkInNews() {
+    var $feed = $("#news");
+    if (localStorage.getItem('checkedIn') == 'true') {
+      var newNews = document.createElement("li");
+      var src = "/icons/friendIcons/pamela.png";
+      newNews.innerHTML = "<img src=" + src + "/><div><p>Pamela (Me)</p><p>Just Checked In!</p></div>";
+      $feed.prepend(newNews);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    $('#toolbar-header').text('News');
+    checkInNews();
+  });
+</script>
 
 <style>  
   #news li {
     height: 100px;
   }
+
   #news li img {
     border-radius: 30px;
     float:left;
@@ -16,6 +29,7 @@
     width: 60px;
     padding:5px;
   }
+
   #news li div {
     padding: 5px;
   }
@@ -24,19 +38,19 @@
 <div id="wrapper">
   <ul id="news">
     <li>
-        <img src="/icons/barIcons/canopyClub.png"/><div><p>Canopy Club 5h ago</p><p>Snoop Lion Performing Tonight at 11pm!</p></div>
+      <img src="/icons/barIcons/canopyClub.png"/><div><p>Canopy Club 5h ago</p><p>Snoop Lion Performing Tonight at 11pm!</p></div>
     </li>
     <li>
-        <img src="/icons/friendIcons/alex.jpg"/><div><p>Alex</p><p>Checked Into Legends</p></div>
+      <img src="/icons/friendIcons/alex.jpg"/><div><p>Alex</p><p>Checked Into Legends</p></div>
     </li>
     <li>
-        <img src="/icons/barIcons/brothers.png"><div><p>Brother's</p><p>$1 Wells All Night!</p></div>
+      <img src="/icons/barIcons/brothers.png"><div><p>Brother's</p><p>$1 Wells All Night!</p></div>
     </li>
     <li>
-        <img src="/icons/friendIcons/daniel.jpg"><div><p>Daniel</p><p>Checked Into Brothers</p></div>
+      <img src="/icons/friendIcons/daniel.jpg"><div><p>Daniel</p><p>Checked Into Brothers</p></div>
     </li>
     <li>
-        <img src="/icons/barIcons/blindPig.png"><div><p>The Blind Pig</p><p>Come In And Try Our New Chrismas Ale!</p></div>
+      <img src="/icons/barIcons/blindPig.png"><div><p>The Blind Pig</p><p>Come In And Try Our New Chrismas Ale!</p></div>
     </li>
   </ul>
 </div>
