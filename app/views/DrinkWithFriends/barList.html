@@ -1,18 +1,5 @@
 <script>
   DrinkWithFriendsController.bars();
-  
-  function populateDB(tx) {
-    tx.executeSql('DROP TABLE IF EXISTS Bars');
-    tx.executeSql('CREATE TABLE IF NOT EXISTS Bars (name, rating, desc, specials, icon_loc)');
-    tx.executeSql('INSERT INTO Bars (name, rating, desc, specials, icon_loc) VALUES ("Murphy\'s", 4, "lakdjfa", "$4 Leinenkugel Orange Shandy","/icons/barIcons/murphys.jpg")');
-    tx.executeSql('INSERT INTO Bars (name, rating, desc, specials, icon_loc) VALUES ("Clybourne", 3, "lakdsjflk", "$1 wells", "/icons/barIcons/clybourne.png")');
-    tx.executeSql('INSERT INTO Bars (name, rating, desc, specials, icon_loc) VALUES ("Blind Pig", 5, "Local craft brews and brewery", "Mug Night", "/icons/barIcons/blindPig.png")');
-    tx.executeSql('INSERT INTO Bars (name, rating, desc, specials, icon_loc) VALUES ("FireHaus", 3, "", "$1 wells", "/icons/barIcons/firehaus.png")');
-    tx.executeSql('INSERT INTO Bars (name, rating, desc, specials, icon_loc) VALUES ("Brothers", 5, "", "$2 Jager Bombs $1.50 High Life", "/icons/barIcons/brothers.png")');
-    tx.executeSql('INSERT INTO Bars (name, rating, desc, specials, icon_loc) VALUES ("Canopy Club", 4, "", "$4 Hennessey/Ginger ale", "/icons/barIcons/canopyClub.png")');
-    tx.executeSql('INSERT INTO Bars (name, rating, desc, specials, icon_loc) VALUES ("Legends", 2, "Bar and grill", "$2 All Drafts", "/icons/barIcons/legends.png")');
-    
-  }
 
   function selectQuerySuccess(tx, results) {
     var len = results.rows.length;
@@ -37,20 +24,16 @@
   }
   
   function getBars(tx) {
-    tx.executeSql('SELECT * FROM Bars', [], selectQuerySuccess);
+    tx.executeSql('SELECT * FROM Bars ORDER BY UPPER(name)', [], selectQuerySuccess);
   }
   
   function errorCB(err) {
     alert("Error processing SQL: "+err.code);
   }
-  
-  function successCB() {
-  }
 
   document.addEventListener("deviceready", onDeviceReady, false);
   function onDeviceReady() {
     var db = window.openDatabase("bars", "1.0", "Bars DB", 1000000);
-	db.transaction(populateDB, errorCB, successCB);
 	db.transaction(getBars, errorCB);
   }
 </script>

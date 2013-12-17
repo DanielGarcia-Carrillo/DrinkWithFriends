@@ -1,5 +1,71 @@
 <script>
-  DrinkWithFriendsController.checkIn();  
+  DrinkWithFriendsController.checkIn();
+  
+  function bars(tx, results) {
+    var itemsLength = results.rows.length;
+    var $placesSelect = $("#place-select");
+    for (var i=0; i < itemsLength; i++) {
+      var currentItem = results.rows.item(i);
+      var bar = currentItem.name;
+      $placesSelect.append(
+        $("<option></option>")
+         .attr("value",currentItem.id)
+         .text(bar)
+      );
+    }
+  }
+  
+  function populateBarsSelect(tx) {
+    tx.executeSql('SELECT name FROM Bars ORDER BY UPPER(name)', [], function(tx, results) {
+      if (document.readyState == "complete") {
+        bars(tx, results);
+      } else {
+        document.addEventListener('DOMContentLoaded', function(e) {
+          bars(tx, results);
+        });
+      }
+    });
+  }
+  
+  function friends(tx, results) {
+    var itemsLength = results.rows.length;
+    var $friendSelect = $('#friends-select');
+    for (var i=0; i < itemsLength; i++) {
+      var currentItem = results.rows.item(i);
+      var name = currentItem.firstName + ' ' + currentItem.lastName;
+      $friendSelect.append(
+        $("<option></option>")
+         .attr("value",currentItem.id)
+         .text(name)
+	  );
+    }
+  }
+  
+  function populateFriendsSelect(tx) {
+    tx.executeSql('SELECT firstName,lastName,id FROM friends ORDER BY UPPER(firstName)', [], function(tx, results) {
+      if (document.readyState == "complete") {
+        friends(tx, results);
+      } else {
+        document.addEventListener('DOMContentLoaded', function(e) {
+          friends(tx, results);
+        });
+      }
+    });
+  }
+  
+  document.addEventListener("deviceready", onDeviceReady, false);
+  function onDeviceReady() {
+    var db = window.openDatabase(
+      "FriendDatabase",       // database name
+      "1.0",            // database version
+      "Friend ListDB",   // database display name
+      200000            // database size in bytes
+    );
+    db.transaction(populateFriendsSelect);
+    
+    db = window.openDatabase("bars", "1.0", "Bars DB", 1000000);
+    db.transaction(populateBarsSelect);
+  }
 </script>
 <style>
   input[type="submit"] {
@@ -8,17 +74,17 @@
 </style>
   <div class="content-padded">
     <h2>Check In</h2>
-        <FORM action="/views/DrinkWithFriends/checkedIn.html" method="post">
-    <P>
+        <form action="/views/DrinkWithFriends/checkedIn.html" method="post">
+    <p>
         Where:<br>
-           <input type="text" name="bar"><br>
+      	<select id="place-select" required></select><br>
         With Who: <br>
-        <input type="text" name="withFriends"><br><br>
+      	<select id="friends-select" multiple></select><br>
         Cover cost:<br>
     	Free <input type="range" name="cover">$20<br> <br>       
         Wait Time<br>
     None <input type="range" name="waitTime"> 40 min<br><br>
     <input type="submit" value="Submit">
-    </P>
- </FORM>
+    </p>
+ </form>
   </div>

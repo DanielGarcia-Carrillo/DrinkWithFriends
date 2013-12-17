@@ -50,7 +50,7 @@ window.DrinkWithFriendsController = {
 		"isFriend bit, " +
 		"lastSeen VARCHAR(50), " +
 		"findMe VARCHAR(50), " +
-		"favoriteDrink VARCHAR(50), " +
+		"favoriteDrink VARCHAR(50) " +
 		")";
       tx.executeSql(sql);
 	  tx.executeSql("INSERT INTO friends (id,firstName,lastName,email,icon,isFriend,lastSeen,findMe,favoriteDrink) VALUES (1,'Jessica','Mullins','jessica@gmail.com','jess.jpg',1,'Murphys','Bartini','Shirley Temple')");
@@ -73,7 +73,7 @@ window.DrinkWithFriendsController = {
     // Cordova is ready
     function onDeviceReady() {
       // Create a new database
-      db = window.openDatabase(
+      var db = window.openDatabase(
         "FriendDatabase",       // database name
         "1.0",            // database version
         "Friend ListDB",   // database display name
@@ -86,6 +86,19 @@ window.DrinkWithFriendsController = {
         databaseError,  // error callback function
         populatingDone  // success callback function; ran after the the transaction is done
       );
+      
+      db = window.openDatabase("bars", "1.0", "Bars DB", 1000000);
+      db.transaction(function(tx) {
+        tx.executeSql('DROP TABLE IF EXISTS Bars');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Bars (id, name, rating, desc, specials, icon_loc)');
+        tx.executeSql('INSERT INTO Bars (id, name, rating, desc, specials, icon_loc) VALUES (1,"Murphy\'s", 4, "lakdjfa", "$4 Leinenkugel Orange Shandy","/icons/barIcons/murphys.jpg")');
+        tx.executeSql('INSERT INTO Bars (id, name, rating, desc, specials, icon_loc) VALUES (2,"Clybourne", 3, "lakdsjflk", "$1 wells", "/icons/barIcons/clybourne.png")');
+        tx.executeSql('INSERT INTO Bars (id, name, rating, desc, specials, icon_loc) VALUES (3,"Blind Pig", 5, "Local craft brews and brewery", "Mug Night", "/icons/barIcons/blindPig.png")');
+        tx.executeSql('INSERT INTO Bars (id, name, rating, desc, specials, icon_loc) VALUES (4,"FireHaus", 3, "", "$1 wells", "/icons/barIcons/firehaus.png")');
+        tx.executeSql('INSERT INTO Bars (id, name, rating, desc, specials, icon_loc) VALUES (5,"Brothers", 5, "", "$2 Jager Bombs $1.50 High Life", "/icons/barIcons/brothers.png")');
+        tx.executeSql('INSERT INTO Bars (id, name, rating, desc, specials, icon_loc) VALUES (6,"Canopy Club", 4, "", "$4 Hennessey/Ginger ale", "/icons/barIcons/canopyClub.png")');
+        tx.executeSql('INSERT INTO Bars (id, name, rating, desc, specials, icon_loc) VALUES (7,"Legends", 2, "Bar and grill", "$2 All Drafts", "/icons/barIcons/legends.png")');
+      });
     }
 
 
@@ -98,6 +111,8 @@ window.DrinkWithFriendsController = {
     function databaseError(err) {
       alert("Error code: " + err.code + "; message: " + err.message);
     }
+    
+    
   },
   
    addFriend: function () {
