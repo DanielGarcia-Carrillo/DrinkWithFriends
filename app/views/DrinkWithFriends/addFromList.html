@@ -50,12 +50,7 @@
 	
 	function onDeviceReady() {
 		console.log("opening database");
-		db = window.openDatabase(
-		"FriendDatabase",       // database name
-		"1.0",            // database version
-		"Friend ListDB",   // database display name
-		200000            // database size in bytes
-		);
+		db = window.openDatabase("FriendDatabase", "1.0","Friend ListDB", 200000);
 		console.log("database opened");
 		db.transaction(queryDB, transaction_error);
 	}
@@ -66,8 +61,8 @@
     }
 	
 	function transaction_error(tx, error) {
-			$('#busy').hide();
-			alert("Database Error: " + error);
+		$('#busy').hide();
+		alert("Database Error: " + error);
 	}
 	
     // Show the results of the database query

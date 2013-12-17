@@ -7,37 +7,13 @@
     // Cordova is ready
     function onDeviceReady() {
       // Create a new database
-      db = window.openDatabase(
-        "FriendDatabase",       // database name
-        "1.0",            // database version
-        "Friend ListDB",   // database display name
-        200000            // database size in bytes
-      );
-
-      // populate the DB, then run a query
-      db.transaction(
-        populateDB,     // transaction to run; a SQLTransaction object is passed to the callback function
-        databaseError,  // error callback function
-        populatingDone  // success callback function; ran after the the transaction is done
-      );
-    }
-
-    function populateDB(tx) {
-	// Filler method
-    	}
-
-    function populatingDone(){
-      db.transaction(queryDB, databaseError);
-	  $('#busy').hide();
-    }
-
-
-    function runQuery() {
+	  db = window.openDatabase("FriendDatabase", "1.0","Friend ListDB", 200000);
       db.transaction(queryDB, databaseError);
     }
 
     // Query the database
     function queryDB(tx) {
+	$('#busy').hide();
       tx.executeSql('SELECT * FROM friends', [], gotQueryResults, databaseError);
     }
 

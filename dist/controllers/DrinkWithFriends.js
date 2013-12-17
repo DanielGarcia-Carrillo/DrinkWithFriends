@@ -73,19 +73,10 @@ window.DrinkWithFriendsController = {
     // Cordova is ready
     function onDeviceReady() {
       // Create a new database
-      var db = window.openDatabase(
-        "FriendDatabase",       // database name
-        "1.0",            // database version
-        "Friend ListDB",   // database display name
-        200000            // database size in bytes
-      );
+	  db = window.openDatabase("FriendDatabase", "1.0","Friend ListDB", 200000);
 
       // populate the DB, then run a query
-      db.transaction(
-        populateDB,     // transaction to run; a SQLTransaction object is passed to the callback function
-        databaseError,  // error callback function
-        populatingDone  // success callback function; ran after the the transaction is done
-      );
+      db.transaction(populateDB, databaseError, populatingDone);
       
       db = window.openDatabase("barsdb", "1.0", "BarsDB", 1000000);
       db.transaction(function(tx) {
@@ -103,16 +94,13 @@ window.DrinkWithFriendsController = {
 
 
     function populatingDone(){
-      //db.transaction(queryDB, databaseError);
 	  $('#busy').hide();
     }
 	
 	// Transaction error callback
     function databaseError(err) {
       alert("Error code: " + err.code + "; message: " + err.message);
-    }
-    
-    
+    }  
   },
   
    addFriend: function () {
